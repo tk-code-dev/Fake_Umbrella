@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Fake Umbrella</string>
+    <string name="weather_image_icon">weather_image_icon</string>
 </resources>
