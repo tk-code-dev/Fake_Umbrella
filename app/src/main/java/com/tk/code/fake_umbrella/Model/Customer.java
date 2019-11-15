@@ -1,14 +1,12 @@
 package com.tk.code.fake_umbrella.Model;
 
 public class Customer {
-    String customerName;
-    String contactPerson;
-    String telephone;
-    String location;
-    String numberOfEmployees;
-    String weather;
+    public String customerName;
+    public String contactPerson;
+    public String telephone;
+    public String location;
+    public String numberOfEmployees;
 
-    Customer() {}
 
     public Customer(String customerName, String contactPerson, String telephone, String location, String numberOfEmployees) {
         this.customerName = customerName;
@@ -18,36 +16,6 @@ public class Customer {
         this.numberOfEmployees = numberOfEmployees;
     }
 
-    public Customer(String customerName, String contactPerson, String telephone, String location, String numberOfEmployees, String weather) {
-        this.customerName = customerName;
-        this.contactPerson = contactPerson;
-        this.telephone = telephone;
-        this.location = location;
-        this.numberOfEmployees = numberOfEmployees;
-        this.weather = weather;
-    }
 
-    public String getCustomerName() {
-        return customerName;
-    }
 
-    public String getContactPerson() {
-        return contactPerson;
-    }
-
-    public String getTelephone() {
-        return telephone;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public String getNumberOfEmployees() {
-        return numberOfEmployees;
-    }
-
-    public String getWeather() {
-        return weather;
-    }
 }

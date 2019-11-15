@@ -5,7 +5,11 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.tk.code.fake_umbrella.Model.MyAdapter;
 import com.tk.code.fake_umbrella.Model.SampleData;
@@ -15,7 +19,6 @@ import com.tk.code.fake_umbrella.R;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 
 public class TableActivity extends AppCompatActivity {
 
@@ -27,6 +30,7 @@ public class TableActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_table);
         RecyclerView recyclerView = findViewById(R.id.myRecyclerView);
+
 
         // use this setting to improve performance
         recyclerView.setHasFixedSize(true);
@@ -80,5 +84,26 @@ public class TableActivity extends AppCompatActivity {
                     }
                 });
         itemDecor.attachToRecyclerView(recyclerView);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.item_add_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.action_add:
+                Intent myIntent = new Intent(TableActivity.this, InputInfoActivity.class);
+                myIntent.putExtra("INTENT_ADD", "BACK"); //Optional parameters
+                TableActivity.this.startActivity(myIntent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Fake Umbrella</string>
     <string name="weather_image_icon">weather_image_icon</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="chart">CHART</string>
+    <string name="list">LIST</string>
 </resources>
