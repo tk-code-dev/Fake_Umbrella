@@ -7,10 +7,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.tk.code.fake_umbrella.Model.Customer;
 import com.tk.code.fake_umbrella.Model.MyAdapter;
 import com.tk.code.fake_umbrella.Model.SampleData;
 import com.tk.code.fake_umbrella.Model.SampleWeatherData;
@@ -25,10 +32,44 @@ public class TableActivity extends AppCompatActivity {
     SampleData sampleData = new SampleData();
     SampleWeatherData sampleWeatherData = new SampleWeatherData();
 
+    // Get a reference to our posts
+    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef2 = database.getReference("customer//");
+
+    List<Customer> customers;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_table);
+
+        myRef2.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Customer customer = dataSnapshot.getValue(Customer.class);
+                    String str_name = customer.customerName;
+                    String str_contact = customer.contactPerson;
+                    String str_phone = customer.telephone;
+                    String str_location = customer.location;
+                    int int_num = customer.numberOfEmployees;
+
+                    customers = new ArrayList<>(Arrays.asList(customer));
+                    Log.d("customers", customers.get(0).customerName);
+                    Log.d("data", String.format("company:%s, contact:%s, phone:%s, location:%s, num:%d", str_name, str_contact, str_phone, str_location, int_num));
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
+
+
+
         RecyclerView recyclerView = findViewById(R.id.myRecyclerView);
 
 
@@ -40,9 +81,9 @@ public class TableActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(rLayoutManager);
 
         // copy to ArrayList
-        final  List<String> itemNames = new ArrayList<String>(Arrays.asList(sampleData.names));
 //        List<Integer> itemImages = new ArrayList<Integer>(Arrays.asList(sampleData.photos));
-        final  List<String> itemContacters = new ArrayList<String>(Arrays.asList(sampleData.contacts));
+        final List<String> itemNames = new ArrayList<String>(Arrays.asList(sampleData.names));
+        final List<String> itemContacters = new ArrayList<String>(Arrays.asList(sampleData.contacts));
         final List<String> itemPhones = new ArrayList<String>(Arrays.asList(sampleData.phones));
         final List<String> itemLocations = new ArrayList<String>(Arrays.asList(sampleData.locations));
         final List<Integer> itemNumsOfEmployees = new ArrayList<Integer>(Arrays.asList(sampleData.numsOfEmployees));
@@ -53,6 +94,31 @@ public class TableActivity extends AppCompatActivity {
 //            String str = String.format(Locale.ENGLISH, "%s@gmail.com", itemNames.get(i));
 //            itemEmails.add(str);
 //        }
+
+        myRef2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Customer customer = dataSnapshot.getValue(Customer.class);
+                    String str_name = customer.customerName;
+                    String str_contact = customer.contactPerson;
+                    String str_phone = customer.telephone;
+                    String str_location = customer.location;
+                    int int_num = customer.numberOfEmployees;
+
+                    customers = new ArrayList<>(Arrays.asList(customer));
+                    Log.d("customers", customers.get(0).customerName);
+                    Log.d("data", String.format("company:%s, contact:%s, phone:%s, location:%s, num:%d", str_name, str_contact, str_phone, str_location, int_num));
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
 
 
         // specify an adapter

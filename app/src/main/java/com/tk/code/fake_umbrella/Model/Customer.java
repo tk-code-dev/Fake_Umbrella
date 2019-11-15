@@ -5,9 +5,12 @@ public class Customer {
     public String contactPerson;
     public String telephone;
     public String location;
-    public Integer numberOfEmployees;
+    public int numberOfEmployees;
 
-    public Customer(String customerName, String contactPerson, String telephone, String location, Integer numberOfEmployees) {
+    public Customer() {
+    }
+
+    public Customer(String customerName, String contactPerson, String telephone, String location, int numberOfEmployees) {
         this.customerName = customerName;
         this.contactPerson = contactPerson;
         this.telephone = telephone;
