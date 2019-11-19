@@ -6,4 +6,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="chart">CHART</string>
     <string name="list">LIST</string>
+    <string name="fake">Fake</string>
+    <string name="umbrella">Umbrella</string>
+    <string name="keep_you_dry">keep you dry</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign Up</string>
 </resources>

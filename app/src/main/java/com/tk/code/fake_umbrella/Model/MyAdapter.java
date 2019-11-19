@@ -108,16 +108,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         holder.phoneView.setText(iPhones.get(position));
         holder.locationView.setText(iLocations.get(position));
         holder.numView.setText(Integer.toString(iNumsOfEmployyes.get(position)));
-        holder.date1V.setText(iDates.get(0));
-        holder.date2V.setText(iDates.get(1));
-        holder.date3V.setText(iDates.get(2));
-        holder.date4V.setText(iDates.get(3));
-        holder.date5V.setText(iDates.get(4));
-        holder.weather1V.setImageResource(iWeatherIcons.get(0));
-        holder.weather2V.setImageResource(iWeatherIcons.get(1));
-        holder.weather3V.setImageResource(iWeatherIcons.get(2));
-        holder.weather4V.setImageResource(iWeatherIcons.get(3));
-        holder.weather5V.setImageResource(iWeatherIcons.get(4));
+        holder.date1V.setText(iDates.get(7));
+        holder.date2V.setText(iDates.get(15));
+        holder.date3V.setText(iDates.get(23));
+        holder.date4V.setText(iDates.get(31));
+        holder.date5V.setText(iDates.get(39));
+        holder.weather1V.setImageResource(iWeatherIcons.get(7));
+        holder.weather2V.setImageResource(iWeatherIcons.get(15));
+        holder.weather3V.setImageResource(iWeatherIcons.get(23));
+        holder.weather4V.setImageResource(iWeatherIcons.get(31));
+        holder.weather5V.setImageResource(iWeatherIcons.get(39));
         Log.d("value",iWeatherIcons.get(0).toString());
 
 
