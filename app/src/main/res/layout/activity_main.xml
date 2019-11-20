@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/holo_blue_light"
+    android:padding="20dp"
     tools:context=".View.MainActivity">
 
     <TextView
@@ -11,7 +13,10 @@
         android:layout_width="411dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Weather 5days Forecast"
+        android:layout_marginBottom="15dp"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:text="Customer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,6 +37,8 @@
             android:id="@+id/multiTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@android:color/background_light"
             android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
