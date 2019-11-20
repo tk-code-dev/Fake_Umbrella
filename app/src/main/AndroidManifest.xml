@@ -13,15 +13,14 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
         <activity android:name=".View.InputInfoActivity"></activity>
-        <activity android:name=".View.TableActivity">
+        <activity android:name=".View.TableActivity"></activity>
+        <activity android:name=".View.TitleActivity"></activity>
+        <activity android:name=".View.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".View.TitleActivity"></activity>
-        <activity android:name=".View.MainActivity" />
+            </intent-filter></activity>
     </application>
 
 </manifest>
