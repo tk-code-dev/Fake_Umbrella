@@ -129,7 +129,6 @@ public class TableActivity extends AppCompatActivity {
                             }
 
                             case R.id.chart: {
-
                                 // Sort by number of employees
                                 Collections.sort(itemCustomers, new CompareNumEmployee());
                                 for (Customer c : itemCustomers) {

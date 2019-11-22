@@ -57,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Customer customer = dataSnapshot.getValue(Customer.class);
                     itemCustomers.add(customer);
-//                    getCurrentData(itemCustomers);
                 }
             }
 
