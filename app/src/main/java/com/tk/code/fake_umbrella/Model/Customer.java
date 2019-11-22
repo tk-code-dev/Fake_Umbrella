@@ -1,5 +1,7 @@
 package com.tk.code.fake_umbrella.Model;
 
+import java.util.Comparator;
+
 public class Customer {
     public String customerName;
     public String contactPerson;
@@ -57,4 +59,6 @@ public class Customer {
     public void setNumberOfEmployees(int numberOfEmployees) {
         this.numberOfEmployees = numberOfEmployees;
     }
+
+
 }
