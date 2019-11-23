@@ -11,4 +11,24 @@
     <string name="keep_you_dry">keep you dry</string>
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
+    <string name="customer_information">Customer Information</string>
+    <string name="customer_name">Customer Name</string>
+    <string name="contact_person">Contact Person</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="city_name">City Name</string>
+    <string name="number_of_employees">Number of Employees</string>
+    <string name="delete">DELETE</string>
+    <string name="cancel">CANCEL</string>
+    <string name="add">ADD</string>
+    <string name="customer">Customer</string>
+    <string name="company_name">company name</string>
+    <string name="phone">phone#</string>
+    <string name="contact">contact</string>
+    <string name="location">location</string>
+    <string name="size">size</string>
+    <string name="date2">date2</string>
+    <string name="date1">date1</string>
+    <string name="date3">date3</string>
+    <string name="date4">date4</string>
+    <string name="date5">date5</string>
 </resources>

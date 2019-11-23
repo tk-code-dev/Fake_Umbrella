@@ -2,24 +2,27 @@ package com.tk.code.fake_umbrella.Model;
 
 //AndroidX
 
-import android.util.Log;
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
 import com.tk.code.fake_umbrella.R;
+import com.tk.code.fake_umbrella.View.ModifyActivity;
 
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
-    private List<CustomerListWeather> iCustomers;
+public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
+
+    public static List<Customer> iCustomers;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -32,8 +35,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         TextView phoneView;
         TextView locationView;
         TextView numView;
-        TextView date1V, date2V,date3V, date4V, date5V;
-        ImageView weather1V,weather2V,weather3V,weather4V,weather5V;
+        TextView date1V, date2V, date3V, date4V, date5V;
+        ImageView weather1V, weather2V, weather3V, weather4V, weather5V;
+        Context context = itemView.getContext();
 
         ViewHolder(View v) {
             super(v);
@@ -54,11 +58,55 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             weather3V = v.findViewById(R.id.weatherIV3);
             weather4V = v.findViewById(R.id.weatherIV4);
             weather5V = v.findViewById(R.id.weatherIV5);
+
+            date1V.setVisibility(View.GONE);
+            date2V.setVisibility(View.GONE);
+            date3V.setVisibility(View.GONE);
+            date4V.setVisibility(View.GONE);
+            date5V.setVisibility(View.GONE);
+
+            weather1V.setVisibility(View.GONE);
+            weather2V.setVisibility(View.GONE);
+            weather3V.setVisibility(View.GONE);
+            weather4V.setVisibility(View.GONE);
+            weather5V.setVisibility(View.GONE);
+
+//            itemView.setOnClickListener(new View.OnClickListener()
+//            {
+//                @Override
+//                public void onClick(View v)
+//                {
+//
+//                 }
+//            });
+
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(v.getContext(), "Position is " + getAdapterPosition(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            //Long Press
+            v.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    Customer modifyCustomer = new Customer(iCustomers.get(getAdapterPosition()).customerName,
+                            iCustomers.get(getAdapterPosition()).contactPerson,
+                            iCustomers.get(getAdapterPosition()).telephone,
+                            iCustomers.get(getAdapterPosition()).location,
+                            iCustomers.get(getAdapterPosition()).numberOfEmployees);
+                    Intent intent = new Intent(context, ModifyActivity.class);
+                    intent.putExtra("MODIFY", modifyCustomer);
+                    context.startActivity(intent);
+                    return false;
+                }
+            });
         }
     }
 
     // Provide a suitable constructor
-    public MyAdapter(List<CustomerListWeather> itemCustomers) {
+    public Adapter(List<Customer> itemCustomers) {
         this.iCustomers = itemCustomers;
     }
 
@@ -80,24 +128,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         // - get element from dataset at this position
         // - replace the contents of the view with that element
 //        holder.imageView.setImageResource(iImages.get(position));
-        holder.nameView.setText(iCustomers.get(position).customer.customerName);
-        holder.contactView.setText(iCustomers.get(position).customer.contactPerson);
-        holder.phoneView.setText(iCustomers.get(position).customer.telephone);
-        holder.locationView.setText(iCustomers.get(position).customer.location);
-        holder.numView.setText(iCustomers.get(position).customer.numberOfEmployees+"");
-
-        holder.date1V.setText(iCustomers.get(position).date[0]);
-        holder.date2V.setText(iCustomers.get(position).date[1]);
-        holder.date3V.setText(iCustomers.get(position).date[2]);
-        holder.date4V.setText(iCustomers.get(position).date[3]);
-        holder.date5V.setText(iCustomers.get(position).date[4]);
-            Picasso.get().load("http://openweathermap.org/img/w/"+iCustomers.get(position).icon[0]+ ".png").resize(250, 250).into(holder.weather1V);
-            Picasso.get().load("http://openweathermap.org/img/w/"+iCustomers.get(position).icon[1]+ ".png").resize(250, 250).into(holder.weather2V);
-            Picasso.get().load("http://openweathermap.org/img/w/"+iCustomers.get(position).icon[2]+ ".png").resize(250, 250).into(holder.weather3V);
-            Picasso.get().load("http://openweathermap.org/img/w/"+iCustomers.get(position).icon[3]+ ".png").resize(250, 250).into(holder.weather4V);
-            Picasso.get().load("http://openweathermap.org/img/w/"+iCustomers.get(position).icon[4]+ ".png").resize(250, 250).into(holder.weather5V);
+        holder.nameView.setText(iCustomers.get(position).customerName);
+        holder.contactView.setText(iCustomers.get(position).contactPerson);
+        holder.phoneView.setText(iCustomers.get(position).telephone);
+        holder.locationView.setText(iCustomers.get(position).location);
+        holder.numView.setText(iCustomers.get(position).numberOfEmployees+"");
     }
-
     // Return the size of dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {

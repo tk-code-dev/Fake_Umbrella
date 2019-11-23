@@ -18,7 +18,7 @@
         android:paddingStart="5dp"
         android:paddingTop="2dp"
         android:paddingEnd="10dp"
-        android:text="company name"
+        android:text="@string/company_name"
         android:textColor="#00f"
         android:textSize="20sp" />
 
@@ -33,14 +33,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="contact" />
+            android:text="@string/contact" />
 
         <TextView
             android:id="@+id/phone_TV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="phone#" />
+            android:text="@string/phone" />
     </LinearLayout>
 
     <LinearLayout
@@ -54,13 +54,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="location"/>
+            android:text="@string/location"/>
         <TextView
             android:id="@+id/numOfEmployees_TV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="size" />
+            android:text="@string/size" />
 
 
     </LinearLayout>
@@ -82,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="date1"
+                android:text="@string/date1"
                 android:textColor="@android:color/background_light"
                 android:textStyle="bold" />
 
@@ -92,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="date2"
+                android:text="@string/date2"
                 android:textColor="@android:color/background_light"
                 android:textStyle="bold" />
 
@@ -102,7 +102,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="date3"
+                android:text="@string/date3"
                 android:textColor="@android:color/background_light"
                 android:textStyle="bold" />
 
@@ -112,7 +112,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="date4"
+                android:text="@string/date4"
                 android:textColor="@android:color/background_light"
                 android:textStyle="bold" />
 
@@ -122,7 +122,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="date5"
+                android:text="@string/date5"
                 android:textColor="@android:color/background_light"
                 android:textStyle="bold" />
         </LinearLayout>

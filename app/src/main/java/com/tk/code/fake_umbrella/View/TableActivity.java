@@ -1,17 +1,15 @@
 package com.tk.code.fake_umbrella.View;
 
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import retrofit2.Call;
-
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-
 
 import android.content.Context;
 import android.content.Intent;
@@ -49,10 +47,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+
 
 
 public class TableActivity extends AppCompatActivity {
@@ -72,21 +70,10 @@ public class TableActivity extends AppCompatActivity {
     public static List<Customer> itemCustomers = new ArrayList<>();
     RecyclerView recyclerView;
 
-    public List<Integer> weather5days = new ArrayList<>(Arrays.asList(sampleWeatherData.weatherIcons));
-    public ArrayList<String> test = new ArrayList<>();
-
-    static int countOfRain = 0;
-    static List<String> descriptions = new ArrayList<>();
-    static List<String> dates = new ArrayList<>();
-    static List<String> weatherIcons = new ArrayList<>();
-    static List<Weather> weathers = new ArrayList<>();
     static List<CustomerWeather> customerWeathers = new ArrayList<>();
-    List<Weather> returnWeatherDatas = new ArrayList<>();
     static List<Object> locations = new ArrayList<>();
     static String reformatDate1, reformatDate2, reformatDate3, reformatDate4, reformatDate5;
-    FetchWeather fetchWeather = new FetchWeather();
     public static List<CustomerListWeather> customerListWeathers = new ArrayList<>();
-    List<CustomerChart> customerCharts;
     String chartCompanyName, chartWeather1, chartWeather2, chartWeather3, chartWeather4, chartWeather5;
     Integer chartNum;
     Boolean isRain;
@@ -104,16 +91,7 @@ public class TableActivity extends AppCompatActivity {
         RecyclerView.LayoutManager rLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(rLayoutManager);
 
-        // copy to ArrayList    TEST
-//        final List<String> itemNames = new ArrayList<String>(Arrays.asList(sampleData.names));
-//        final List<String> itemContacters = new ArrayList<String>(Arrays.asList(sampleData.contacts));
-//        final List<String> itemPhones = new ArrayList<String>(Arrays.asList(sampleData.phones));
-//        final List<String> itemLocations = new ArrayList<String>(Arrays.asList(sampleData.locations));
-//        final List<Integer> itemNumsOfEmployees = new ArrayList<Integer>(Arrays.asList(sampleData.numsOfEmployees));
-
-        BottomNavigationView bottomNavigationView = (BottomNavigationView)
-                findViewById(R.id.bottomNavigationView
-                );
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -155,16 +133,12 @@ public class TableActivity extends AppCompatActivity {
                                 intent.putExtra(EXTRA_MESSAGE, chartData);
                                 startActivity(intent);
 
-//                                System.out.println(customerListWeathers.get(0).getCustomer().numberOfEmployees+"");
-//                                System.out.println(customerListWeathers.get(1).getCustomer().numberOfEmployees+"");
-//                                System.out.println(customerListWeathers.get(2).getCustomer().numberOfEmployees+"");
-
                                 return true;
                             }
 
 
                             case R.id.fetchweather: {
-//  distinct location
+                                //  distinct location
                                 locations = locations.stream()
                                         .distinct()
                                         .collect(Collectors.toList());
@@ -180,33 +154,6 @@ public class TableActivity extends AppCompatActivity {
                                     getCurrentData(locationList.get(i));
                                     i++;
                                 }
-
-
-//                                for (int i = 0; i < itemCustomers.size(); i++) {
-//                                    Log.d("Check location",itemCustomers.get(i).location);
-//                                    Log.d("Check customer","***"+(itemCustomers.get(i).telephone));
-//                                customerWeathers.add(new CustomerWeather(itemCustomers.get(i),
-//                                            getSavedResponse(itemCustomers.get(i).location)));
-//
-//                                    String res = customerWeathers.get(i).locationWeather;
-//                                    String[] resCity = res.split("@");
-//                                    Log.d("formatArray", Arrays.toString(resCity));
-//
-//                                    String[] resDescriptions = resCity[1].split(">");
-//                                    String[] resIcons = resCity[2].split(">");
-//                                    String[] resDate = resCity[3].split(">");
-
-//                                    customerListWeathers.add(new CustomerListWeather(itemCustomers.get(i), resDescriptions, resDate, resIcons));
-//
-//                                    Log.d("FinalData",customerListWeathers.get(i).customer.customerName + " " +
-//                                            customerListWeathers.get(i).customer.contactPerson+ " "+
-//                                            customerListWeathers.get(i).customer.telephone+" "+
-//                                            customerListWeathers.get(i).description[0] + " "+
-//                                            customerListWeathers.get(i).description[1] + " "+
-//                                            customerListWeathers.get(i).description[2] + " "+
-//                                            customerListWeathers.get(i).description[3] + " "+
-//                                            customerListWeathers.get(i).description[4]);
-//                                }
                                 return true;
                             }
                         }
@@ -219,6 +166,8 @@ public class TableActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
+
+
         myRef.addValueEventListener(new ValueEventListener() {
 
             @Override
@@ -226,7 +175,7 @@ public class TableActivity extends AppCompatActivity {
                 itemCustomers.clear();
                 locations.clear();
 
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                for (final DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Customer customer = dataSnapshot.getValue(Customer.class);
                     itemCustomers.add(customer);
                     String str_location = customer.location;
@@ -236,6 +185,35 @@ public class TableActivity extends AppCompatActivity {
 
                     final RecyclerView.Adapter rAdapter = new Adapter(itemCustomers);
                     recyclerView.setAdapter(rAdapter);
+
+                    // ItemTouchHelper
+                    ItemTouchHelper itemDecor = new ItemTouchHelper(
+                            new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP |
+                                    ItemTouchHelper.DOWN, ItemTouchHelper.RIGHT) {
+                                @Override
+                                public boolean onMove(RecyclerView recyclerView,
+                                                      RecyclerView.ViewHolder viewHolder,
+                                                      RecyclerView.ViewHolder target) {
+                                    final int fromPos = viewHolder.getAdapterPosition();
+                                    final int toPos = target.getAdapterPosition();
+                                    rAdapter.notifyItemMoved(fromPos, toPos);
+                                    return true;
+                                }
+
+                                @Override
+                                public void onSwiped(RecyclerView.ViewHolder viewHolder,
+                                                     int direction) {
+                                    final int fromPos = viewHolder.getAdapterPosition();
+                                    itemCustomers.remove(fromPos);
+
+                                    rAdapter.notifyItemRemoved(fromPos);
+                                    dataSnapshot.getRef().removeValue();
+                                }
+
+
+                            });
+                    itemDecor.attachToRecyclerView(recyclerView);
+
                 }
             }
 
@@ -245,6 +223,8 @@ public class TableActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -344,7 +324,6 @@ public class TableActivity extends AppCompatActivity {
         }
     }
 
-
     String getSavedResponse(String city) {
         Log.d("CITY", city);
         String savedResponse;
@@ -362,12 +341,10 @@ public class TableActivity extends AppCompatActivity {
         return "load error";
     }
 
-
     List<CustomerListWeather> makeFormatedData(List<Customer> customers) {
 
         for (int i = 0; i < customers.size(); i++) {
             Log.d("Check location", customers.get(i).location);
-            Log.d("Check customer", "***" + (customers.get(i).telephone));
             customerWeathers.add(new CustomerWeather(customers.get(i),
                     getSavedResponse(customers.get(i).location)));
 
@@ -405,17 +382,16 @@ public class TableActivity extends AppCompatActivity {
         }
     }
 
-    public class CompareNumEmployeeWeather implements Comparator<CustomerListWeather> {
-
-        @Override
-        public int compare(CustomerListWeather c1, CustomerListWeather c2) {
-            if (c1.getCustomer().getNumberOfEmployees() < c2.getCustomer().getNumberOfEmployees()) {
-                return 1;
-            } else if (c1.getCustomer().getNumberOfEmployees() > c2.getCustomer().getNumberOfEmployees()) {
-                return -1;
-            } else {
-                return 0;
-            }
-        }
-    }
+//    public class CompareNumEmployeeWeather implements Comparator<CustomerListWeather> {
+//        @Override
+//        public int compare(CustomerListWeather c1, CustomerListWeather c2) {
+//            if (c1.getCustomer().getNumberOfEmployees() < c2.getCustomer().getNumberOfEmployees()) {
+//                return 1;
+//            } else if (c1.getCustomer().getNumberOfEmployees() > c2.getCustomer().getNumberOfEmployees()) {
+//                return -1;
+//            } else {
+//                return 0;
+//            }
+//        }
+//    }
 }

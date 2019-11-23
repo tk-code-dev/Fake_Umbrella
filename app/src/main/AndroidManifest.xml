@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".View.ChartActivity"></activity>
+        <activity android:name=".View.ModifyActivity"></activity>
+        <activity android:name=".View.ChartActivity" />
         <activity android:name=".View.InputInfoActivity" />
         <activity android:name=".View.TableActivity">
             <intent-filter>
@@ -23,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".View.TitleActivity" />
-        <activity android:name=".View.MainActivity"></activity>
+        <activity android:name=".View.MainActivity" />
     </application>
 
 </manifest>
