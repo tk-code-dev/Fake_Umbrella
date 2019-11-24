@@ -3,7 +3,9 @@ package com.tk.code.fake_umbrella.View;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -19,8 +21,8 @@ public class InputInfoActivity extends AppCompatActivity {
     Button addBtn, cancelBtn, deleteBtn;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
-    String strName, strContact, strPhone, strLocation;
-    int intNum;
+    String strName = "", strContact= "", strPhone= "", strLocation= "";
+    int intNum = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +52,9 @@ public class InputInfoActivity extends AppCompatActivity {
                 strPhone = phoneET.getText().toString();
                 strLocation = locationET.getText().toString();
                 intNum = Integer.parseInt(numEmployeesET.getText().toString());
-
+                if (strName.isEmpty()){
+                    Snackbar.make(view, "Add Information", Snackbar.LENGTH_SHORT).show();
+                }
                 DatabaseReference postsRef = myRef.child("customer");
                 DatabaseReference newPostRef = postsRef.push();
 
@@ -82,5 +86,10 @@ public class InputInfoActivity extends AppCompatActivity {
         phoneET.setText("");
         locationET.setText("");
         numEmployeesET.setText("");
+    }
+
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(InputInfoActivity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }

@@ -132,7 +132,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         holder.contactView.setText(iCustomers.get(position).contactPerson);
         holder.phoneView.setText(iCustomers.get(position).telephone);
         holder.locationView.setText(iCustomers.get(position).location);
-        holder.numView.setText(iCustomers.get(position).numberOfEmployees+"");
+        holder.numView.setText(iCustomers.get(position).numberOfEmployees);
     }
     // Return the size of dataset (invoked by the layout manager)
     @Override

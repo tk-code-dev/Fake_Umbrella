@@ -13,6 +13,7 @@
 
     <TextView
         android:id="@+id/companyName_TV"
+        style="@style/Widget.AppCompat.TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingStart="5dp"
@@ -20,11 +21,13 @@
         android:paddingEnd="10dp"
         android:text="@string/company_name"
         android:textColor="#00f"
-        android:textSize="20sp" />
+        android:textSize="30sp"
+        android:textStyle="bold|italic" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="3dp"
         android:background="#cef"
         android:orientation="horizontal">
 
@@ -33,14 +36,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/contact" />
+            android:text="@string/contact"
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/phone_TV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/phone" />
+            android:text="@string/phone"
+            android:textSize="24sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -54,13 +59,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/location"/>
+            android:text="@string/location"
+            android:textSize="24sp" />
+
         <TextView
             android:id="@+id/numOfEmployees_TV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/size" />
+            android:text="@string/size"
+            android:textSize="18sp" />
 
 
     </LinearLayout>
@@ -84,7 +92,8 @@
                 android:gravity="center"
                 android:text="@string/date1"
                 android:textColor="@android:color/background_light"
-                android:textStyle="bold" />
+                android:textSize="18sp"
+                android:textStyle="bold|italic" />
 
             <TextView
                 android:id="@+id/date2_TV"
@@ -94,7 +103,8 @@
                 android:gravity="center"
                 android:text="@string/date2"
                 android:textColor="@android:color/background_light"
-                android:textStyle="bold" />
+                android:textSize="18sp"
+                android:textStyle="bold|italic" />
 
             <TextView
                 android:id="@+id/date3_TV"
@@ -104,6 +114,7 @@
                 android:gravity="center"
                 android:text="@string/date3"
                 android:textColor="@android:color/background_light"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -114,7 +125,8 @@
                 android:gravity="center"
                 android:text="@string/date4"
                 android:textColor="@android:color/background_light"
-                android:textStyle="bold" />
+                android:textSize="18sp"
+                android:textStyle="bold|italic" />
 
             <TextView
                 android:id="@+id/date5_TV"
@@ -124,7 +136,8 @@
                 android:gravity="center"
                 android:text="@string/date5"
                 android:textColor="@android:color/background_light"
-                android:textStyle="bold" />
+                android:textSize="18sp"
+                android:textStyle="bold|italic" />
         </LinearLayout>
 
         <LinearLayout

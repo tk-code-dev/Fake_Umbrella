@@ -72,7 +72,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/number_of_employees"
-            android:inputType="number|textPersonName" />
+            android:inputType="number" />
 
     </LinearLayout>
 

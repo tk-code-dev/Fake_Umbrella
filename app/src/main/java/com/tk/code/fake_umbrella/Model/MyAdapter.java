@@ -84,7 +84,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         holder.contactView.setText(iCustomers.get(position).customer.contactPerson);
         holder.phoneView.setText(iCustomers.get(position).customer.telephone);
         holder.locationView.setText(iCustomers.get(position).customer.location);
-        holder.numView.setText(iCustomers.get(position).customer.numberOfEmployees+"");
+        holder.numView.setText(iCustomers.get(position).customer.numberOfEmployees);
 
         holder.date1V.setText(iCustomers.get(position).date[0]);
         holder.date2V.setText(iCustomers.get(position).date[1]);
