@@ -82,9 +82,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 //        holder.imageView.setImageResource(iImages.get(position));
         holder.nameView.setText(iCustomers.get(position).customer.customerName);
         holder.contactView.setText(iCustomers.get(position).customer.contactPerson);
-        holder.phoneView.setText(iCustomers.get(position).customer.telephone);
-        holder.locationView.setText(iCustomers.get(position).customer.location);
-        holder.numView.setText(iCustomers.get(position).customer.numberOfEmployees);
+        holder.phoneView.setText((String.valueOf(iCustomers.get(position).customer.telephone).replaceFirst("(\\d{3})(\\d{3})(\\d+)", "($1)-$2-$3")));
+        holder.locationView.setText(iCustomers.get(position).customer.location.toUpperCase());
+        holder.numView.setText(iCustomers.get(position).customer.numberOfEmployees+"");
 
         holder.date1V.setText(iCustomers.get(position).date[0]);
         holder.date2V.setText(iCustomers.get(position).date[1]);

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#AADAFF"
+    android:background="#fff"
     android:baselineAligned="false"
     android:orientation="vertical"
     android:paddingLeft="20dp"
@@ -14,21 +15,22 @@
     <TextView
         android:id="@+id/companyName_TV"
         style="@style/Widget.AppCompat.TextView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="monospace"
         android:paddingStart="5dp"
         android:paddingTop="2dp"
         android:paddingEnd="10dp"
         android:text="@string/company_name"
-        android:textColor="#00f"
+        android:textColor="#00008f"
         android:textSize="30sp"
-        android:textStyle="bold|italic" />
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="3dp"
-        android:background="#cef"
+        android:background="@drawable/layout_bg_round_corner"
         android:orientation="horizontal">
 
         <TextView
@@ -36,8 +38,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:paddingStart="24dp"
             android:text="@string/contact"
-            android:textSize="24sp" />
+            android:textColor="#fff"
+            android:textSize="24sp"
+            tools:ignore="RtlSymmetry" />
 
         <TextView
             android:id="@+id/phone_TV"
@@ -45,22 +50,27 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/phone"
+            android:textColor="#fff"
             android:textSize="24sp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#cef"
-        android:orientation="horizontal">
+        android:background="#87ceeb"
+        android:orientation="horizontal"
+        android:layout_marginBottom="15dp">
 
         <TextView
             android:id="@+id/location_TV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:paddingStart="24dp"
             android:text="@string/location"
-            android:textSize="24sp" />
+            android:textColor="#fff"
+            android:textSize="24sp"
+            tools:ignore="RtlSymmetry" />
 
         <TextView
             android:id="@+id/numOfEmployees_TV"
@@ -68,6 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/size"
+            android:textColor="#fff"
             android:textSize="18sp" />
 
 
@@ -76,6 +87,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_weight="1"
         android:orientation="vertical">
 
@@ -91,7 +103,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/date1"
-                android:textColor="@android:color/background_light"
+                android:textColor="#87ceeb"
                 android:textSize="18sp"
                 android:textStyle="bold|italic" />
 
@@ -102,7 +114,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/date2"
-                android:textColor="@android:color/background_light"
+                android:textColor="#87ceeb"
                 android:textSize="18sp"
                 android:textStyle="bold|italic" />
 
@@ -113,7 +125,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/date3"
-                android:textColor="@android:color/background_light"
+                android:textColor="#87ceeb"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -124,7 +136,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/date4"
-                android:textColor="@android:color/background_light"
+                android:textColor="#87ceeb"
                 android:textSize="18sp"
                 android:textStyle="bold|italic" />
 
@@ -135,7 +147,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/date5"
-                android:textColor="@android:color/background_light"
+                android:textColor="#87ceeb"
                 android:textSize="18sp"
                 android:textStyle="bold|italic" />
         </LinearLayout>

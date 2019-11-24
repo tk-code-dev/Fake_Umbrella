@@ -2,6 +2,8 @@ package com.tk.code.fake_umbrella.Model;
 
 //AndroidX
 
+
+
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -128,11 +130,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         // - get element from dataset at this position
         // - replace the contents of the view with that element
 //        holder.imageView.setImageResource(iImages.get(position));
+
         holder.nameView.setText(iCustomers.get(position).customerName);
         holder.contactView.setText(iCustomers.get(position).contactPerson);
-        holder.phoneView.setText(iCustomers.get(position).telephone);
-        holder.locationView.setText(iCustomers.get(position).location);
-        holder.numView.setText(iCustomers.get(position).numberOfEmployees);
+        holder.phoneView.setText((String.valueOf(iCustomers.get(position).telephone).replaceFirst("(\\d{3})(\\d{3})(\\d+)", "($1)-$2-$3")));
+        holder.locationView.setText(iCustomers.get(position).location.toUpperCase());
+        holder.numView.setText(iCustomers.get(position).numberOfEmployees+"");
     }
     // Return the size of dataset (invoked by the layout manager)
     @Override

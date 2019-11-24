@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
@@ -92,7 +93,6 @@ public class TableActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(rLayoutManager);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
-
         bottomNavigationView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -103,6 +103,7 @@ public class TableActivity extends AppCompatActivity {
                                 customerListWeathers = makeFormatedData(itemCustomers);
                                 final RecyclerView.Adapter listAdapter = new MyAdapter(customerListWeathers);
                                 recyclerView.setAdapter(listAdapter);
+                                R.id.chart.setVisibility(View.VISIBLE);
                                 return true;
                             }
 
