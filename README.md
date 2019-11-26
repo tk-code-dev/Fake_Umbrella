@@ -1,4 +1,4 @@
-# Fake Umbrella App :&#x2602:
+# Fake Umbrella App :umbrella:
 
 Fake Umbrella App allows users to view the current five-day forecast. This data is pulled from OpenWeatherMap.
 Users are able to create, update and delete customer information. Users can see Top 4 Customer chart.
