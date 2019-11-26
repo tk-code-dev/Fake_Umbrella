@@ -10,6 +10,12 @@ Users are able to create, update and delete customer information. Users can see 
 - works with city name
 - keep customer information
 - - -
+# Instructions
+- Press 'ADD' button on right corner
+- Input customer name, contact person, phone number, location (city), number of employees
+- Press Long Click on the table list, and 'MODIFY' or 'DELETE' it
+- Press 'CHECK CURRENT WEATHER', select LIST or CHART
+- - -
 # ScreenShot
 <img src="device-2019-11-13-211303.png" width="200px"> <img src="device-2019-11-26-110854.png" width="200px"> 
 <img src="device-2019-11-26-110940.png" width="200px"> <img src="device-2019-11-26-111015.png" width="200px"> 
