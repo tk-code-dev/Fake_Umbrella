@@ -17,13 +17,15 @@
         <activity android:name=".View.ChartActivity" />
         <activity android:name=".View.InputInfoActivity" />
         <activity android:name=".View.TableActivity">
+
+        </activity>
+        <activity android:name=".View.TitleActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".View.TitleActivity" />
         <activity android:name=".View.MainActivity" />
     </application>
 

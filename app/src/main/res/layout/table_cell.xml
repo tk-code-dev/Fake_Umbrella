@@ -159,7 +159,7 @@
             android:background="#cef"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button">
+            app:layout_constraintTop_toBottomOf="@+id/btnSignIn">
 
             <ImageView
                 android:id="@+id/weatherIV1"

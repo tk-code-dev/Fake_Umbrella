@@ -43,7 +43,6 @@ public class InputInfoActivity extends AppCompatActivity {
         String BackBtn = intent.getStringExtra("INTENT_ADD");
         deleteBtn.setText(BackBtn);
 
-
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

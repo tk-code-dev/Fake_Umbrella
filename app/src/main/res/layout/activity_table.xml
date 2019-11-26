@@ -11,21 +11,70 @@
         android:id="@+id/myRecyclerView"
         android:layout_width="409dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintBottom_toTopOf="@+id/bottomButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="406dp"
-        android:layout_height="60dp"
-        android:alpha="0.9"
 
+    <LinearLayout
+        android:id="@+id/bottomButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="#fff"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/item_bottom_navigation" />
+        app:menu="@menu/item_bottom_navigation">
+
+        <Button
+            android:id="@+id/btnWeather"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onClickWeather"
+            android:background="@drawable/layout_bg_round_corner_darkblue"
+            android:textColor="@color/cardview_light_background"
+            android:layout_margin="8dp"
+            android:text="Check Weather" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnChart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/layout_bg_round_corner_darkblue"
+                android:textColor="@color/cardview_light_background"
+                android:onClick="onClickChart"
+                android:layout_margin="8dp"
+                android:text="Chart" />
+
+            <Button
+                android:id="@+id/btnList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/layout_bg_round_corner_darkblue"
+                android:textColor="@color/cardview_light_background"
+                android:onClick="onClickList"
+                android:layout_margin="8dp"
+                android:text="List" />
+
+            <Button
+                android:id="@+id/btnBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/layout_bg_round_corner_darkblue"
+                android:textColor="@color/cardview_light_background"
+                android:layout_margin="8dp"
+                android:text="Back" />
+        </LinearLayout>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

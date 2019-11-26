@@ -1,8 +1,5 @@
 package com.tk.code.fake_umbrella.Model;
 
-//AndroidX
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,7 +76,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         // - get element from dataset at this position
         // - replace the contents of the view with that element
-//        holder.imageView.setImageResource(iImages.get(position));
         holder.nameView.setText(iCustomers.get(position).customer.customerName);
         holder.contactView.setText(iCustomers.get(position).customer.contactPerson);
         holder.phoneView.setText((String.valueOf(iCustomers.get(position).customer.telephone).replaceFirst("(\\d{3})(\\d{3})(\\d+)", "($1)-$2-$3")));
@@ -97,7 +93,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             Picasso.get().load("http://openweathermap.org/img/w/"+iCustomers.get(position).icon[3]+ ".png").resize(250, 250).into(holder.weather4V);
             Picasso.get().load("http://openweathermap.org/img/w/"+iCustomers.get(position).icon[4]+ ".png").resize(250, 250).into(holder.weather5V);
     }
-
     // Return the size of dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {

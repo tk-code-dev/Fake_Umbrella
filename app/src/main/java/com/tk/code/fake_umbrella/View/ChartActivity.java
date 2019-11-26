@@ -1,9 +1,5 @@
 package com.tk.code.fake_umbrella.View;
 
-import android.graphics.Color;
-import android.graphics.LinearGradient;
-import android.graphics.Paint;
-import android.graphics.SweepGradient;
 import android.os.Bundle;
 import com.anychart.AnyChart;
 import com.anychart.AnyChartView;

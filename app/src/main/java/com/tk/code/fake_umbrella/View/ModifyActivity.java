@@ -2,55 +2,72 @@ package com.tk.code.fake_umbrella.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.tk.code.fake_umbrella.Model.Customer;
 import com.tk.code.fake_umbrella.R;
 
 public class ModifyActivity extends AppCompatActivity {
 
     EditText nameET, contactET, phoneET, locationET, numEmployeesET;
-    Button addBtn, cancelBtn, deleteBtn;
+    Button addModifyBtn, cancelModifyBtn, deleteModifyBtn, yesModifyBtn, deleteYesBtn;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
     String strName, strContact, strPhone, strLocation;
     int intNum;
+    static Customer modifySaveCustomer;
+    static Boolean isModify = false;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_input_info);
+        setContentView(R.layout.activity_modify);
 
+        isModify = false;
         nameET = findViewById(R.id.customerET);
         contactET = findViewById(R.id.contactET);
         phoneET = findViewById(R.id.phoneET);
         locationET = findViewById(R.id.locationET);
         numEmployeesET = findViewById(R.id.numEmployeeET);
 
-        addBtn = findViewById(R.id.addBtn);
-        cancelBtn = findViewById(R.id.cancelBtn);
-        deleteBtn = findViewById(R.id.deleteBtn);
+        addModifyBtn = findViewById(R.id.addModifyBtn);
+        cancelModifyBtn = findViewById(R.id.cancelModifyBtn);
+        deleteModifyBtn = findViewById(R.id.deleteModifyBtn);
+        yesModifyBtn = findViewById(R.id.yesModifyBtn);
+        deleteYesBtn = findViewById(R.id.deleteYesBtn);
 
-        addBtn.setText("MODIFY");
+        yesModifyBtn.setVisibility(View.GONE);
+        deleteYesBtn.setVisibility(View.GONE);
 
-        Customer modifyCustomer = (Customer) getIntent().getSerializableExtra("MODIFY");
+
+        final Customer modifyCustomer = (Customer) getIntent().getSerializableExtra("MODIFY");
         nameET.setText(modifyCustomer.customerName);
         contactET.setText(modifyCustomer.contactPerson);
         phoneET.setText(modifyCustomer.telephone);
         locationET.setText(modifyCustomer.location);
-        numEmployeesET.setText(modifyCustomer.numberOfEmployees+"");
+        numEmployeesET.setText(modifyCustomer.numberOfEmployees + "");
 
-
-        addBtn.setOnClickListener(new View.OnClickListener() {
+        addModifyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
+                cancelModifyBtn.setVisibility(View.VISIBLE);
+                yesModifyBtn.setVisibility(View.VISIBLE);
+                deleteModifyBtn.setVisibility(View.GONE);
+                addModifyBtn.setVisibility(View.GONE);
+
                 strName = nameET.getText().toString();
                 strContact = contactET.getText().toString();
                 strPhone = phoneET.getText().toString();
@@ -60,23 +77,95 @@ public class ModifyActivity extends AppCompatActivity {
                 DatabaseReference postsRef = myRef.child("customer");
                 DatabaseReference newPostRef = postsRef.push();
 
-                newPostRef.setValue(new Customer(strName, strContact, strPhone, strLocation, intNum));
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+                Query deleteQuery = ref.child("customer").orderByChild("customerName").equalTo(strName);
 
-                Snackbar.make(view, "Added", Snackbar.LENGTH_SHORT).show();
-                clearTextInput();
+                Snackbar.make(v, "Modified", Snackbar.LENGTH_SHORT).show();
+                modifySaveCustomer = new Customer(strName, strContact, strPhone, strLocation, intNum);
+
+                cancelModifyBtn.setText("NO");
             }
         });
 
-        cancelBtn.setOnClickListener(new View.OnClickListener() {
+
+        deleteModifyBtn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                deleteModifyBtn.setVisibility(View.GONE);
+                addModifyBtn.setVisibility(View.GONE);
+                yesModifyBtn.setVisibility(View.GONE);
+                deleteYesBtn.setVisibility(View.VISIBLE);
+                cancelModifyBtn.setText("NO");
+
+                strName = nameET.getText().toString();
+
+                DatabaseReference postsRef = myRef.child("customer");
+                DatabaseReference newPostRef = postsRef.push();
+
+                // Get the unique ID generated by a push()
+                String postId = newPostRef.getKey();
+
+//                newPostRef.setValue(new Customer(strName, strContact, strPhone, strLocation, intNum));
+                myRef.child(postId).setValue(new Customer(strName, strContact, strPhone, strLocation, intNum));
+
+                Snackbar.make(view, "Deleted", Snackbar.LENGTH_SHORT).show();
+            }
+        });
+
+        cancelModifyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
 
-        deleteBtn.setOnClickListener(new View.OnClickListener() {
+        yesModifyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+                Query deleteQuery = ref.child("customer").orderByChild("customerName").equalTo(strName);
+                deleteQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                               @Override
+                                                               public void onDataChange(DataSnapshot dataSnapshot) {
+                                                                   for (DataSnapshot deleteSnapshot : dataSnapshot.getChildren()) {
+                                                                       deleteSnapshot.getRef().removeValue();
+                                                                   }
+                                                               }
+
+                                                               @Override
+                                                               public void onCancelled(DatabaseError databaseError) {
+                                                                   Log.e("cancel modify", "onCancelled", databaseError.toException());
+                                                               }
+                                                           }
+                );
+                DatabaseReference postsRef = myRef.child("customer");
+                DatabaseReference newPostRef = postsRef.push();
+                newPostRef.setValue(modifySaveCustomer);
+                finish();
+            }
+        });
+
+        deleteYesBtn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+                Query deleteQuery = ref.child("customer").orderByChild("customerName").equalTo(strName);
+                deleteQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                               @Override
+                                                               public void onDataChange(DataSnapshot dataSnapshot) {
+                                                                   for (DataSnapshot deleteSnapshot : dataSnapshot.getChildren()) {
+                                                                       deleteSnapshot.getRef().removeValue();
+                                                                   }
+                                                               }
+
+                                                               @Override
+                                                               public void onCancelled(DatabaseError databaseError) {
+                                                                   Log.e("cancel modify", "onCancelled", databaseError.toException());
+                                                               }
+                                                           }
+                );
                 finish();
             }
         });

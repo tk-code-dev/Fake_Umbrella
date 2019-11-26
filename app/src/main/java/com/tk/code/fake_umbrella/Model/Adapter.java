@@ -1,9 +1,5 @@
 package com.tk.code.fake_umbrella.Model;
 
-//AndroidX
-
-
-
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -11,16 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.tk.code.fake_umbrella.R;
 import com.tk.code.fake_umbrella.View.ModifyActivity;
-
 import java.util.List;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
@@ -73,21 +64,18 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             weather4V.setVisibility(View.GONE);
             weather5V.setVisibility(View.GONE);
 
-//            itemView.setOnClickListener(new View.OnClickListener()
-//            {
-//                @Override
-//                public void onClick(View v)
-//                {
-//
-//                 }
-//            });
-
-            v.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(v.getContext(), "Position is " + getAdapterPosition(), Toast.LENGTH_SHORT).show();
                 }
             });
+
+//            v.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Toast.makeText(v.getContext(), "Position is " + getAdapterPosition(), Toast.LENGTH_SHORT).show();
+//                }
+//            });
 
             //Long Press
             v.setOnLongClickListener(new View.OnLongClickListener() {
@@ -101,6 +89,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
                     Intent intent = new Intent(context, ModifyActivity.class);
                     intent.putExtra("MODIFY", modifyCustomer);
                     context.startActivity(intent);
+
                     return false;
                 }
             });
@@ -134,9 +123,10 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         holder.nameView.setText(iCustomers.get(position).customerName);
         holder.contactView.setText(iCustomers.get(position).contactPerson);
         holder.phoneView.setText((String.valueOf(iCustomers.get(position).telephone).replaceFirst("(\\d{3})(\\d{3})(\\d+)", "($1)-$2-$3")));
-        holder.locationView.setText(iCustomers.get(position).location.toUpperCase());
-        holder.numView.setText(iCustomers.get(position).numberOfEmployees+"");
+        holder.locationView.setText(iCustomers.get(position).location);
+        holder.numView.setText(iCustomers.get(position).numberOfEmployees + "");
     }
+
     // Return the size of dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
