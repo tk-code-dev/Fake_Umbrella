@@ -4,10 +4,10 @@ Fake Umbrella App allows users to view the current five-day forecast. This data 
 Users are able to create, update and delete customer information. Users can see Top 4 Customer chart.
 
 # Features
-5 day forecast
-Top 4customers chart
-works with city name
-keep customer information
+- 5 day forecast
+- Top 4customers chart
+- works with city name
+- keep customer information
 
 <img src="device-2019-11-13-211303.png" width="200px">
 Title Screen
