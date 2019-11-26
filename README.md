@@ -11,15 +11,16 @@ Users are able to create, update and delete customer information. Users can see 
 - keep customer information
 - - -
 # ScreenShot
-<img src="device-2019-11-13-211303.png" width="200px">  
-<img src="device-2019-11-26-110854.png" width="200px"> 
-<img src="device-2019-11-26-110940.png" width="200px"> 
-<img src="device-2019-11-26-111015.png" width="200px"> 
+<img src="device-2019-11-13-211303.png" width="200px"> <img src="device-2019-11-26-110854.png" width="200px"> 
+<img src="device-2019-11-26-110940.png" width="200px"> <img src="device-2019-11-26-111015.png" width="200px"> 
+
 - Title Screen
 - Customer List
 - Customer List with 5day forecast
 - Top4 Customer chart
+
 - - - 
+
 # Built With
 - Retrofit - A type-safe HTTP client for Android and Java
 - OpenWeatherMap - Weather API used
