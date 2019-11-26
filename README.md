@@ -10,14 +10,19 @@ Users are able to create, update and delete customer information. Users can see 
 - works with city name
 - keep customer information
 - - -
+
 <img src="device-2019-11-13-211303.png" width="200px">
 ### Title Screen
+
 <img src="device-2019-11-26-110854.png" width="200px">
 ### Customer List 
+
 <img src="device-2019-11-26-110940.png" width="200px">
 ### Customer List with 5day forecast
+
 <img src="device-2019-11-26-111015.png" width="200px">
 ### Top4 Customer chart
+
 - - - 
 # Built With
 - Retrofit - A type-safe HTTP client for Android and Java
