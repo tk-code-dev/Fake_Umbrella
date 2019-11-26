@@ -9,6 +9,8 @@ import android.widget.Button;
 
 import com.tk.code.fake_umbrella.R;
 
+import java.util.Objects;
+
 public class TitleActivity extends AppCompatActivity {
 
     Button signInBtn;
@@ -16,8 +18,7 @@ public class TitleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_title);
-        getSupportActionBar().hide();
-
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         signInBtn = findViewById(R.id.btnSignIn);
         signInBtn.setOnClickListener(new View.OnClickListener() {

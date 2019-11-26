@@ -31,4 +31,6 @@
     <string name="date3">date3</string>
     <string name="date4">date4</string>
     <string name="date5">date5</string>
+    <string name="yes">YES</string>
+    <string name="modify">MODIFY</string>
 </resources>

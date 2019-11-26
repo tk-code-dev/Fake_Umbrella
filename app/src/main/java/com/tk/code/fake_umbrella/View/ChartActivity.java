@@ -1,6 +1,7 @@
 package com.tk.code.fake_umbrella.View;
 
 import android.os.Bundle;
+
 import com.anychart.AnyChart;
 import com.anychart.AnyChartView;
 import com.anychart.chart.common.dataentry.DataEntry;
@@ -11,20 +12,30 @@ import com.anychart.enums.Anchor;
 import com.anychart.enums.HoverMode;
 import com.anychart.enums.Position;
 import com.anychart.enums.TooltipPositionMode;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.util.Log;
+import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
 import com.tk.code.fake_umbrella.R;
 
 public class ChartActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chart);
+
+        ImageView c1iv = findViewById(R.id.iv1);
+        ImageView c2iv = findViewById(R.id.iv2);
+        ImageView c3iv = findViewById(R.id.iv3);
+        ImageView c4iv = findViewById(R.id.iv4);
 
         Intent intent = getIntent();
         String chartData = intent.getStringExtra(TableActivity.EXTRA_MESSAGE);
@@ -51,9 +62,9 @@ public class ChartActivity extends AppCompatActivity {
         Column column = cartesian.column(data);
 
         column.fill("function() {" +
-                "            if ('true' == '"+ customerChartData1[2] +"')" +
-                "                return 'yellow';" +
-                "            return 'blue';" +
+                "            if ('true' == '" + customerChartData1[2] + "')" +
+                "                return 'red';" +
+                "            return 'green';" +
                 "        }");
 
         column.tooltip()
@@ -64,7 +75,7 @@ public class ChartActivity extends AppCompatActivity {
                 .offsetY(5d)
                 .format("{%Value}{groupsSeparator: }");
 
-        String[] rangeColors = new String[]{"#87cebb", "#ffffff"};
+        String[] rangeColors = new String[]{"#cef", "#ffffff"};
         cartesian.yGrid(0).palette(rangeColors);
 
         cartesian.animation(true);
@@ -77,5 +88,15 @@ public class ChartActivity extends AppCompatActivity {
         cartesian.yAxis(0).title("Number of Employees");
 
         anyChartView.setChart(cartesian);
+
+        String w1 = customerChartData1[2].contains("false") ? "10d" : "01d";
+        String w2 = customerChartData2[2].contains("false") ? "10d" : "01d";
+        String w3 = customerChartData3[2].contains("false") ? "10d" : "01d";
+        String w4 = customerChartData4[2].contains("false") ? "10d" : "01d";
+
+        Picasso.get().load("http://openweathermap.org/img/wn/" + w1 + "@2x.png").resize(250, 250).into(c1iv);
+        Picasso.get().load("http://openweathermap.org/img/wn/" + w2 + "@2x.png").resize(250, 250).into(c2iv);
+        Picasso.get().load("http://openweathermap.org/img/wn/" + w3 + "@2x.png").resize(250, 250).into(c3iv);
+        Picasso.get().load("http://openweathermap.org/img/wn/" + w4 + "@2x.png").resize(250, 250).into(c4iv);
     }
 }

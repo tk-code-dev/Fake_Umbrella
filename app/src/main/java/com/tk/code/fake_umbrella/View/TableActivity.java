@@ -1,5 +1,6 @@
 package com.tk.code.fake_umbrella.View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,6 +11,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -32,7 +34,6 @@ import com.tk.code.fake_umbrella.Model.Customer;
 import com.tk.code.fake_umbrella.Model.CustomerListWeather;
 import com.tk.code.fake_umbrella.Model.CustomerWeather;
 import com.tk.code.fake_umbrella.Model.MyAdapter;
-import com.tk.code.fake_umbrella.Model.SampleWeatherData;
 import com.tk.code.fake_umbrella.R;
 
 import java.io.FileInputStream;
@@ -50,6 +51,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import static android.view.View.*;
+
 public class TableActivity extends AppCompatActivity {
 
     public static final String EXTRA_MESSAGE = "com.tk.code.fake_umbrella.View.MESSAGE";
@@ -58,7 +61,7 @@ public class TableActivity extends AppCompatActivity {
     public static String AppId = "33a82b8c0da7233c25d00cf6f830cb9a";
 
     //    SampleData sampleData = new SampleData();
-    SampleWeatherData sampleWeatherData = new SampleWeatherData();
+//    SampleWeatherData sampleWeatherData = new SampleWeatherData();
 
     // Get a reference to our posts
     public FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -94,7 +97,7 @@ public class TableActivity extends AppCompatActivity {
 
 
         btnWeather = findViewById(R.id.btnWeather);
-        btnWeather.setOnClickListener(new View.OnClickListener() {
+        btnWeather.setOnClickListener(new OnClickListener() {
             public void onClick(View view) {
                 locations = locations.stream()
                         .distinct()
@@ -111,39 +114,39 @@ public class TableActivity extends AppCompatActivity {
                     getCurrentData(locationList.get(i));
                     i++;
                 }
-                btnBack.setVisibility(View.VISIBLE);
-                btnList.setVisibility(View.VISIBLE);
-                btnChart.setVisibility(View.VISIBLE);
-                btnWeather.setVisibility(View.GONE);
+                btnBack.setVisibility(VISIBLE);
+                btnList.setVisibility(VISIBLE);
+                btnChart.setVisibility(VISIBLE);
+                btnWeather.setVisibility(GONE);
             }
         });
 
         btnBack = findViewById(R.id.btnBack);
-        btnBack.setOnClickListener(new View.OnClickListener() {
+        btnBack.setOnClickListener(new OnClickListener() {
             public void onClick(View view) {
                 onResume();
             }
         });
 
         btnList = findViewById(R.id.btnList);
-        btnList.setOnClickListener(new View.OnClickListener() {
+        btnList.setOnClickListener(new OnClickListener() {
             public void onClick(View view) {
                 customerListWeathers.clear();
-                customerListWeathers = makeFormatedData(itemCustomers);
+                customerListWeathers = makeFormatData(itemCustomers);
                 final RecyclerView.Adapter listAdapter = new MyAdapter(customerListWeathers);
                 recyclerView.setAdapter(listAdapter);
             }
         });
 
         btnChart = findViewById(R.id.btnChart);
-        btnChart.setOnClickListener(new View.OnClickListener() {
+        btnChart.setOnClickListener(new OnClickListener() {
             public void onClick(View view) {
                 Collections.sort(itemCustomers, new CompareNumEmployee());
                 for (Customer c : itemCustomers) {
                     System.out.println(c.numberOfEmployees + ", " + c.customerName);
                 }
                 customerListWeathers.clear();
-                customerListWeathers = makeFormatedData(itemCustomers);
+                customerListWeathers = makeFormatData(itemCustomers);
                 chartData = "";
                 for (int i = 0; i < customerListWeathers.size(); i++) {
                     chartCompanyName = customerListWeathers.get(i).customer.customerName;
@@ -155,7 +158,7 @@ public class TableActivity extends AppCompatActivity {
                     chartWeather5 = customerListWeathers.get(i).description[4];
                     isRain = chartWeather1.contains("rain") || chartWeather2.contains("rain") || chartWeather3.contains("rain") || chartWeather4.contains("rain");
 
-                    chartData = chartData + "@" + chartCompanyName + ">" + chartNum.toString() + ">" + isRain.toString();
+                    chartData += "@" + chartCompanyName + ">" + chartNum.toString() + ">" + isRain.toString();
                 }
 
                 Log.d("chartDataA", chartData);
@@ -165,30 +168,31 @@ public class TableActivity extends AppCompatActivity {
             }
         });
 
-        btnBack.setVisibility(View.GONE);
-        btnList.setVisibility(View.GONE);
-        btnChart.setVisibility(View.GONE);
+        btnBack.setVisibility(GONE);
+        btnList.setVisibility(GONE);
+        btnChart.setVisibility(GONE);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        btnWeather.setVisibility(View.VISIBLE);
-        btnBack.setVisibility(View.GONE);
-        btnList.setVisibility(View.GONE);
-        btnChart.setVisibility(View.GONE);
+        btnWeather.setVisibility(VISIBLE);
+        btnBack.setVisibility(GONE);
+        btnList.setVisibility(GONE);
+        btnChart.setVisibility(GONE);
 
         myRef.addValueEventListener(new ValueEventListener() {
 
             @Override
-            public void onDataChange(DataSnapshot snapshot) {
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
                 itemCustomers.clear();
                 locations.clear();
 
                 for (final DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Customer customer = dataSnapshot.getValue(Customer.class);
                     itemCustomers.add(customer);
+                    assert customer != null;
                     String str_location = customer.location;
                     Log.d("data", String.format("location:%s", str_location));
                     locations.add(str_location);
@@ -203,7 +207,7 @@ public class TableActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
                 System.out.println("The read failed: " + databaseError.getCode());
             }
         });
@@ -212,9 +216,9 @@ public class TableActivity extends AppCompatActivity {
                 new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP |
                         ItemTouchHelper.DOWN, ItemTouchHelper.LEFT) {
                     @Override
-                    public boolean onMove(RecyclerView recyclerView,
-                                          RecyclerView.ViewHolder viewHolder,
-                                          RecyclerView.ViewHolder target) {
+                    public boolean onMove(@NonNull RecyclerView recyclerView,
+                                          @NonNull RecyclerView.ViewHolder viewHolder,
+                                          @NonNull RecyclerView.ViewHolder target) {
                         final int fromPos = viewHolder.getAdapterPosition();
                         final int toPos = target.getAdapterPosition();
                         rAdapter.notifyItemMoved(fromPos, toPos);
@@ -222,7 +226,7 @@ public class TableActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onSwiped(RecyclerView.ViewHolder viewHolder,
+                    public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder,
                                          int direction) {
                         int fromPos = viewHolder.getAdapterPosition();
                         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
@@ -249,15 +253,13 @@ public class TableActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
-        switch (item.getItemId()) {
-            case R.id.action_add:
-                Intent myIntent = new Intent(TableActivity.this, InputInfoActivity.class);
-                myIntent.putExtra("INTENT_ADD", "BACK"); //Optional parameters
-                TableActivity.this.startActivity(myIntent);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        if (item.getItemId() == R.id.action_add) {
+            Intent myIntent = new Intent(TableActivity.this, InputInfoActivity.class);
+            myIntent.putExtra("INTENT_ADD", "BACK"); //Optional parameters
+            TableActivity.this.startActivity(myIntent);
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 
     void getCurrentData(String city) {
@@ -267,15 +269,13 @@ public class TableActivity extends AppCompatActivity {
                 .build();
 
         WeatherService service = retrofit.create(WeatherService.class);
-        Log.d("weatherlocation", city);
+        Log.d("weather_location", city);
 
         Call<WeatherResponse5days> call = service.getCurrentWeatherData(city, "", AppId);
         call.enqueue(new Callback<WeatherResponse5days>() {
 
             @Override
-            public void onResponse(Call<WeatherResponse5days> call, Response<WeatherResponse5days> response) {
-                Log.d("codeR", response.code() + "");
-
+            public void onResponse(@NonNull Call<WeatherResponse5days> call, @NonNull Response<WeatherResponse5days> response) {
                 if (response.code() == 200) {
                     WeatherResponse5days weatherResponse5days = response.body();
                     assert weatherResponse5days != null;
@@ -297,8 +297,8 @@ public class TableActivity extends AppCompatActivity {
                     String date3 = weatherResponse5days.list.get(23).dt_txt;
                     String date4 = weatherResponse5days.list.get(31).dt_txt;
                     String date5 = weatherResponse5days.list.get(39).dt_txt;
-                    SimpleDateFormat fromUser = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
-                    SimpleDateFormat myFormat = new SimpleDateFormat("dd");
+                    @SuppressLint("SimpleDateFormat") SimpleDateFormat fromUser = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
+                    @SuppressLint("SimpleDateFormat") SimpleDateFormat myFormat = new SimpleDateFormat("dd");
                     try {
                         reformatDate1 = myFormat.format(fromUser.parse(date1));
                         reformatDate2 = myFormat.format(fromUser.parse(date2));
@@ -318,7 +318,7 @@ public class TableActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<WeatherResponse5days> call, Throwable t) {
+            public void onFailure(@NonNull Call<WeatherResponse5days> call, @NonNull Throwable t) {
                 Log.d("Error", "Error !!");
             }
         });
@@ -353,7 +353,7 @@ public class TableActivity extends AppCompatActivity {
         return "load error";
     }
 
-    List<CustomerListWeather> makeFormatedData(List<Customer> customers) {
+    List<CustomerListWeather> makeFormatData(List<Customer> customers) {
 
         for (int i = 0; i < customers.size(); i++) {
             Log.d("Check location", customers.get(i).location);
