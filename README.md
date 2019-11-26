@@ -6,12 +6,12 @@ Users are able to create, update and delete customer information. Users can see 
 
 # Features
 - 5 day forecast
-- Top 4customers chart
+- Top 4 customers chart
 - works with city name
-- keep customer information
+- save customer information using RealTime DataBase
 - - -
 # Instructions
-- Press 'ADD' button on right corner
+- Press 'ADD' button on right upper corner
 - Input customer name, contact person, phone number, location (city), number of employees
 - Press Long Click on the table list, and 'MODIFY' or 'DELETE' it
 - Press 'CHECK CURRENT WEATHER', select LIST or CHART
