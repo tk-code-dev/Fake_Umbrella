@@ -33,11 +33,14 @@
             android:id="@+id/btnWeather"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="onClickWeather"
-            android:background="@drawable/layout_bg_round_corner_darkblue"
-            android:textColor="@color/cardview_light_background"
             android:layout_margin="8dp"
-            android:text="Check Weather" />
+            android:background="@drawable/layout_bg_round_corner_darkblue"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:onClick="onClickWeather"
+            android:text="Check Weather"
+            android:textColor="@color/cardview_light_background"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -48,33 +51,36 @@
                 android:id="@+id/btnChart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="8dp"
                 android:layout_weight="1"
                 android:background="@drawable/layout_bg_round_corner_darkblue"
-                android:textColor="@color/cardview_light_background"
                 android:onClick="onClickChart"
-                android:layout_margin="8dp"
-                android:text="Chart" />
+                android:text="Chart"
+                android:textColor="@color/cardview_light_background"
+                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/btnList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="8dp"
                 android:layout_weight="1"
                 android:background="@drawable/layout_bg_round_corner_darkblue"
-                android:textColor="@color/cardview_light_background"
                 android:onClick="onClickList"
-                android:layout_margin="8dp"
-                android:text="List" />
+                android:text="List"
+                android:textColor="@color/cardview_light_background"
+                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/btnBack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="8dp"
                 android:layout_weight="1"
                 android:background="@drawable/layout_bg_round_corner_darkblue"
+                android:text="Back"
                 android:textColor="@color/cardview_light_background"
-                android:layout_margin="8dp"
-                android:text="Back" />
+                android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -24,6 +24,7 @@ import android.util.Log;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
+import com.tk.code.fake_umbrella.Model.CustomerChart;
 import com.tk.code.fake_umbrella.R;
 
 public class ChartActivity extends AppCompatActivity {
@@ -46,6 +47,8 @@ public class ChartActivity extends AppCompatActivity {
         String[] customerChartData2 = fourCustomers[2].split(">");
         String[] customerChartData3 = fourCustomers[3].split(">");
         String[] customerChartData4 = fourCustomers[4].split(">");
+
+
         Log.d("formatArray", Arrays.toString(customerChartData1));
 
         AnyChartView anyChartView = findViewById(R.id.any_chart_view);
@@ -88,11 +91,11 @@ public class ChartActivity extends AppCompatActivity {
         cartesian.yAxis(0).title("Number of Employees");
 
         anyChartView.setChart(cartesian);
-
-        String w1 = customerChartData1[2].contains("false") ? "10d" : "01d";
-        String w2 = customerChartData2[2].contains("false") ? "10d" : "01d";
-        String w3 = customerChartData3[2].contains("false") ? "10d" : "01d";
-        String w4 = customerChartData4[2].contains("false") ? "10d" : "01d";
+        //  10d -> Rain icon  :   01d -> Sunny icon
+        String w1 = customerChartData1[2].contains("true") ? "10d" : "01d";
+        String w2 = customerChartData2[2].contains("true") ? "10d" : "01d";
+        String w3 = customerChartData3[2].contains("true") ? "10d" : "01d";
+        String w4 = customerChartData4[2].contains("true") ? "10d" : "01d";
 
         Picasso.get().load("http://openweathermap.org/img/wn/" + w1 + "@2x.png").resize(250, 250).into(c1iv);
         Picasso.get().load("http://openweathermap.org/img/wn/" + w2 + "@2x.png").resize(250, 250).into(c2iv);

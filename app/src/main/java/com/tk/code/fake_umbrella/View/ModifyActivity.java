@@ -74,7 +74,6 @@ public class ModifyActivity extends AppCompatActivity {
                 strLocation = locationET.getText().toString();
                 intNum = Integer.parseInt(numEmployeesET.getText().toString());
 
-                Snackbar.make(v, "Modified", Snackbar.LENGTH_SHORT).show();
                 modifySaveCustomer = new Customer(strName, strContact, strPhone, strLocation, intNum);
 
                 cancelModifyBtn.setText("NO");
@@ -102,8 +101,6 @@ public class ModifyActivity extends AppCompatActivity {
 
                 assert postId != null;
                 myRef.child(postId).setValue(new Customer(strName, strContact, strPhone, strLocation, intNum));
-
-                Snackbar.make(view, "Deleted", Snackbar.LENGTH_LONG).show();
             }
         });
 
@@ -135,6 +132,7 @@ public class ModifyActivity extends AppCompatActivity {
                 DatabaseReference postsRef = myRef.child("customer");
                 DatabaseReference newPostRef = postsRef.push();
                 newPostRef.setValue(modifySaveCustomer);
+                Snackbar.make(view, "Modified", Snackbar.LENGTH_LONG).show();
                 finish();
             }
         });
@@ -159,11 +157,11 @@ public class ModifyActivity extends AppCompatActivity {
                                                                }
                                                            }
                 );
+                Snackbar.make(view, "Deleted", Snackbar.LENGTH_LONG).show();
                 finish();
             }
         });
     }
-
     public void clearTextInput() {
         nameET.setText("");
         contactET.setText("");
