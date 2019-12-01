@@ -14,13 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".View.ModifyActivity"></activity>
+        <activity android:name=".View.CallActivity"></activity>
+        <activity android:name=".View.ModifyActivity" />
         <activity android:name=".View.ChartActivity" />
         <activity android:name=".View.InputInfoActivity" />
-        <activity android:name=".View.TableActivity">
-
-        </activity>
-        <activity android:name=".View.TitleActivity" >
+        <activity android:name=".View.TableActivity"></activity>
+        <activity android:name=".View.TitleActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

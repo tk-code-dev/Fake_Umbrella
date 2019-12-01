@@ -11,6 +11,7 @@ public class Customer implements Serializable {
     public int numberOfEmployees;
 
     public Customer() {
+        // Default constructor required for calls to DataSnapshot.getValue(Customer.class)
     }
 
     public Customer(String customerName, String contactPerson, String telephone, String location, int numberOfEmployees) {

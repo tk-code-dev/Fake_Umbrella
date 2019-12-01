@@ -1,5 +1,7 @@
 package com.tk.code.fake_umbrella.Model;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +10,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.tk.code.fake_umbrella.R;
+import com.tk.code.fake_umbrella.View.CallActivity;
 
 import java.util.List;
 
@@ -31,6 +34,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         TextView numView;
         TextView date1V, date2V,date3V, date4V, date5V;
         ImageView weather1V,weather2V,weather3V,weather4V,weather5V;
+        Context context = itemView.getContext();
 
         ViewHolder(View v) {
             super(v);
@@ -51,6 +55,19 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             weather3V = v.findViewById(R.id.weatherIV3);
             weather4V = v.findViewById(R.id.weatherIV4);
             weather5V = v.findViewById(R.id.weatherIV5);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // change format (xxx)-xxx-xxxx to xxxxxxxxxx
+                    String text = phoneView.getText().toString();
+                    String digits = text.replaceAll("[^0-9]", "");
+//                    Toast.makeText(context,digits,Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(context, CallActivity.class);
+                    intent.putExtra("CALLNUMBER",digits);
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 

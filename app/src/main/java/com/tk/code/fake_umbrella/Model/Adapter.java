@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tk.code.fake_umbrella.R;
+import com.tk.code.fake_umbrella.View.CallActivity;
 import com.tk.code.fake_umbrella.View.ModifyActivity;
 
 import java.text.NumberFormat;
@@ -73,17 +74,18 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             weather4V.setVisibility(View.GONE);
             weather5V.setVisibility(View.GONE);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // change format (xxx)-xxx-xxxx to xxxxxxxxxx
-                    String text = phoneView.getText().toString();
-                    String digits = text.replaceAll("[^0-9]", "");
-//                    Toast.makeText(context,digits,Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + digits));
-                    context.startActivity(intent);
-                }
-            });
+//            itemView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    // change format (xxx)-xxx-xxxx to xxxxxxxxxx
+//                    String text = phoneView.getText().toString();
+//                    String digits = text.replaceAll("[^0-9]", "");
+////                    Toast.makeText(context,digits,Toast.LENGTH_SHORT).show();
+//                    Intent intent = new Intent(context, CallActivity.class);
+//                    intent.putExtra("CALLNUMBER",digits);
+//                    context.startActivity(intent);
+//                }
+//            });
 
 //            v.setOnClickListener(new View.OnClickListener() {
 //                @Override
