@@ -17,6 +17,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.tk.code.fake_umbrella.Model.Adapter;
 import com.tk.code.fake_umbrella.Model.Customer;
 import com.tk.code.fake_umbrella.R;
 
@@ -80,7 +81,6 @@ public class ModifyActivity extends AppCompatActivity {
             }
         });
 
-
         deleteModifyBtn.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -100,7 +100,8 @@ public class ModifyActivity extends AppCompatActivity {
                 String postId = newPostRef.getKey();
 
                 assert postId != null;
-                myRef.child(postId).setValue(new Customer(strName, strContact, strPhone, strLocation, intNum));
+                myRef.child(postId).removeValue();
+//                        setValue(new Customer(strName, strContact, strPhone, strLocation, intNum));
             }
         });
 
@@ -158,10 +159,12 @@ public class ModifyActivity extends AppCompatActivity {
                                                            }
                 );
                 Snackbar.make(view, "Deleted", Snackbar.LENGTH_LONG).show();
+
                 finish();
             }
         });
     }
+
     public void clearTextInput() {
         nameET.setText("");
         contactET.setText("");

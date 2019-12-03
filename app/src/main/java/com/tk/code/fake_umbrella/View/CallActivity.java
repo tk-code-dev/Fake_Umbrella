@@ -39,9 +39,7 @@ public class CallActivity extends AppCompatActivity {
                 } else {
                     requestPermissions(new String[]{CALL_PHONE}, 1);
                 }
-
-
-                          }
+            }
         });
 
         btnNo = findViewById(R.id.btnNo);
@@ -50,12 +48,5 @@ public class CallActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-//        btnYes.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//
-//            }
-//        });
-
     }
 }

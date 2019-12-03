@@ -22,7 +22,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -52,6 +55,8 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static android.view.View.*;
+import static com.tk.code.fake_umbrella.View.FetchWeather.getCurrentData;
+import static com.tk.code.fake_umbrella.View.TitleActivity.mAuth;
 
 public class TableActivity extends AppCompatActivity {
 
@@ -61,7 +66,7 @@ public class TableActivity extends AppCompatActivity {
     public static String AppId = "33a82b8c0da7233c25d00cf6f830cb9a";
 
     //    SampleData sampleData = new SampleData();
-//    SampleWeatherData sampleWeatherData = new SampleWeatherData();
+    //    SampleWeatherData sampleWeatherData = new SampleWeatherData();
 
     // Get a reference to our posts
     public FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -95,14 +100,14 @@ public class TableActivity extends AppCompatActivity {
         RecyclerView.LayoutManager rLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(rLayoutManager);
 
-
+        //  Fetch current weather
         btnWeather = findViewById(R.id.btnWeather);
         btnWeather.setOnClickListener(new OnClickListener() {
             public void onClick(View view) {
                 locations = locations.stream()
                         .distinct()
                         .collect(Collectors.toList());
-
+                //  Distinct City
                 List<String> locationList = new ArrayList<>(locations.size());
                 for (Object object : locations) {
                     locationList.add(Objects.toString(object, null));
@@ -160,14 +165,12 @@ public class TableActivity extends AppCompatActivity {
 
                     chartData += "@" + chartCompanyName + ">" + chartNum.toString() + ">" + isRain.toString();
                 }
-
-                Log.d("chartDataA", chartData);
+                Log.d("chartData", chartData);
                 Intent intent = new Intent(getApplication(), ChartActivity.class);
                 intent.putExtra(EXTRA_MESSAGE, chartData);
                 startActivity(intent);
             }
         });
-
         btnBack.setVisibility(GONE);
         btnList.setVisibility(GONE);
         btnChart.setVisibility(GONE);
@@ -198,11 +201,10 @@ public class TableActivity extends AppCompatActivity {
                     locations.add(str_location);
                     Log.d("locations", Arrays.toString(locations.toArray()));
 
-                    Log.d("unique key",snapshot.getKey());
+                    Log.d("unique key", snapshot.getKey());
 
                     rAdapter = new Adapter(itemCustomers);
                     recyclerView.setAdapter(rAdapter);
-
                 }
             }
 
@@ -212,52 +214,65 @@ public class TableActivity extends AppCompatActivity {
             }
         });
 
-        ItemTouchHelper itemDecor = new ItemTouchHelper(
-                new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP |
-                        ItemTouchHelper.DOWN, ItemTouchHelper.LEFT) {
-                    @Override
-                    public boolean onMove(@NonNull RecyclerView recyclerView,
-                                          @NonNull RecyclerView.ViewHolder viewHolder,
-                                          @NonNull RecyclerView.ViewHolder target) {
-                        final int fromPos = viewHolder.getAdapterPosition();
-                        final int toPos = target.getAdapterPosition();
-                        rAdapter.notifyItemMoved(fromPos, toPos);
-                        return true;
-                    }
 
-                    @Override
-                    public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder,
-                                         int direction) {
-                        int fromPos = viewHolder.getAdapterPosition();
-                        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+//        ItemTouchHelper itemDecor = new ItemTouchHelper(
+//                new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP |
+//                        ItemTouchHelper.DOWN, ItemTouchHelper.LEFT) {
+//                    @Override
+//                    public boolean onMove(@NonNull RecyclerView recyclerView,
+//                                          @NonNull RecyclerView.ViewHolder viewHolder,
+//                                          @NonNull RecyclerView.ViewHolder target) {
+//                        final int fromPos = viewHolder.getAdapterPosition();
+//                        final int toPos = target.getAdapterPosition();
+//                        rAdapter.notifyItemMoved(fromPos, toPos);
+//                        return true;
+//                    }
 
-                        Query deleteQuery = ref.child("customer").orderByChild("customerName").equalTo(itemCustomers.get(fromPos).customerName);
-                        itemCustomers.remove(fromPos);
-                        rAdapter.notifyItemRemoved(fromPos);
+//                    @Override
+//                    public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder,
+//                                         int direction) {
+//                        int fromPos = viewHolder.getAdapterPosition();
+//                        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+//
+//                        Query deleteQuery = ref.child("customer").orderByChild("customerName").equalTo(itemCustomers.get(fromPos).customerName);
+//                        itemCustomers.remove(fromPos);
+//                        rAdapter.notifyItemRemoved(fromPos);
+//
+//                        deleteQuery.getRef().removeValue();
+//
+//                    }
+//                });
 
-                        deleteQuery.getRef().removeValue();
-
-                    }
-                });
-
-        itemDecor.attachToRecyclerView(recyclerView);
+//        itemDecor.attachToRecyclerView(recyclerView);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.item_add_menu, menu);
+        inflater.inflate(R.menu.item_menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
+
+            // Handle item selection ADD
         if (item.getItemId() == R.id.action_add) {
             Intent myIntent = new Intent(TableActivity.this, InputInfoActivity.class);
             myIntent.putExtra("INTENT_ADD", "BACK"); //Optional parameters
             TableActivity.this.startActivity(myIntent);
             return true;
+
+            // Handle item selection SIGN OUT
+        } else if (item.getItemId() == R.id.sign_out) {
+            FirebaseUser user = mAuth.getCurrentUser();
+            if (user != null) {
+                TitleActivity.mGoogleSignInClient.signOut();
+                finish();
+                Toast.makeText(this, user.getDisplayName() + " Sign out!", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "You aren't login Yet!", Toast.LENGTH_SHORT).show();
+            }
         }
         return super.onOptionsItemSelected(item);
     }
