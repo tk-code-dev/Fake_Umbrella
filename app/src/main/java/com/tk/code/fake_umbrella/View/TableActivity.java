@@ -2,7 +2,6 @@ package com.tk.code.fake_umbrella.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import retrofit2.Call;
@@ -55,8 +54,9 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static android.view.View.*;
-import static com.tk.code.fake_umbrella.View.FetchWeather.getCurrentData;
-import static com.tk.code.fake_umbrella.View.TitleActivity.mAuth;
+import static com.tk.code.fake_umbrella.View.GoogleSignInActivity.mAuth;
+import static com.tk.code.fake_umbrella.View.GoogleSignInActivity.mGoogleSignInClient;
+
 
 public class TableActivity extends AppCompatActivity {
 
@@ -265,15 +265,19 @@ public class TableActivity extends AppCompatActivity {
 
             // Handle item selection SIGN OUT
         } else if (item.getItemId() == R.id.sign_out) {
+            if (mAuth != null) {
             FirebaseUser user = mAuth.getCurrentUser();
             if (user != null) {
-                TitleActivity.mGoogleSignInClient.signOut();
+                mGoogleSignInClient.signOut();
+                mAuth.signOut();
                 finish();
                 Toast.makeText(this, user.getDisplayName() + " Sign out!", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "You aren't login Yet!", Toast.LENGTH_SHORT).show();
             }
-        }
+        }}
+        finish();
+
         return super.onOptionsItemSelected(item);
     }
 
