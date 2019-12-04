@@ -24,7 +24,14 @@ Users are able to create, update and delete customer information. Users can see 
 - Customer List
 - Customer List with 5day forecast
 - Top4 Customer chart
+- - -
+<img src="device-2019-12-04-123434.png" width="200px"> <img src="device-2019-12-04-123521.png" width="200px"> 
+<img src="device-2019-12-04-123955.png" width="200px"> <img src="device-2019-12-04-123847.png" width="200px"> 
 
+- SignIn Dialog
+- Email & Password SignIn
+- Google SignIn
+- Phone Call
 - - - 
 
 # Built With
@@ -33,4 +40,4 @@ Users are able to create, update and delete customer information. Users can see 
 - Gson - A Java serialization/deserialization library to convert Java Objects into JSON and back
 - Picasso - A powerful image downloading and caching library for Android
 - Lottie - An Animation for title screen
-- Firebase - RealTime DB used
+- Firebase - Authentication, RealTime Database used
