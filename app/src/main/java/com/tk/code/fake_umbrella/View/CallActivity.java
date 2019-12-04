@@ -13,6 +13,8 @@ import android.widget.Button;
 
 import com.tk.code.fake_umbrella.R;
 
+import java.util.Objects;
+
 import static android.Manifest.permission.CALL_PHONE;
 
 public class CallActivity extends AppCompatActivity {
@@ -23,6 +25,7 @@ public class CallActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_call);
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         btnYes = findViewById(R.id.btnYes);
         btnYes.setOnClickListener(new View.OnClickListener() {
